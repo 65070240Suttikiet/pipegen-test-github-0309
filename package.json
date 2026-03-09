@@ -1,0 +1,9 @@
+{
+  "name": "pipegen-test",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo 'Tests passed!' && exit 0",
+    "build": "echo 'Build done!' && exit 0",
+    "lint": "echo 'Lint passed!' && exit 0"
+  }
+}
