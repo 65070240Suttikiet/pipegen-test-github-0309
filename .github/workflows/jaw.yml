@@ -1,23 +1,30 @@
-name: Existing Pipeline
-on:
+name: My-Pipeline
+'on':
   push:
-    branches: ["main", "develop"]
-
+    branches:
+      - main
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout Code
         uses: actions/checkout@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
       - name: Install Dependencies
-        run: npm ci
+        run: |
+          if ! command -v npm > /dev/null 2>&1; then npm install -g npm; fi
+          npm ci
+
       - name: Run Tests
         run: npm test
-      - name: Build Project
-        run: npm run build
-      - name: My Custom Step
-        run: echo "This is my own step"
+
+      - name: Upload Coverage
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
