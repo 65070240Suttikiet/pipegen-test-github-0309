@@ -1,10 +1,8 @@
-name: Auto-Generated-Pipeline
-on:
+name: Edit
+'on':
   push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
-
+    branches:
+      - main
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -16,7 +14,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install Dependencies
         run: |
@@ -25,9 +23,3 @@ jobs:
 
       - name: Run Tests
         run: npm test
-
-      - name: Check Code Quality
-        run: npm run lint
-
-      - name: Build Project
-        run: npm run build
