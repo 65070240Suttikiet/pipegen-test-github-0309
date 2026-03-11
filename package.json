@@ -2,8 +2,12 @@
   "name": "pipegen-test",
   "version": "1.0.0",
   "scripts": {
-    "test": "echo 'Tests passed!' && exit 0",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
     "build": "echo 'Build done!' && exit 0",
     "lint": "echo 'Lint passed!' && exit 0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
