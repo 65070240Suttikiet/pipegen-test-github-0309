@@ -22,7 +22,7 @@ jobs:
       - name: Install Dependencies
         run: |
           if ! command -v npm > /dev/null 2>&1; then npm install -g npm; fi
-          npm ci
+          npm install
 
       - name: Run Tests
         run: npm test
@@ -33,11 +33,8 @@ jobs:
       - name: Build Project
         run: npm run build
 
-      - name: Push to Docker Hub
-        if: true
-        run: |
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-          docker push tigerntun/newgithub:latest
+      - name: Build Docker Image
+        run: docker build -t username/repo:latest .
 
       - name: Push to Docker Hub
         if: false
