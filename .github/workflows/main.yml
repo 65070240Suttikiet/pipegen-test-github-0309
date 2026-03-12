@@ -2,10 +2,10 @@ name: Auto-Generated-Pipeline
 'on':
   push:
     branches:
-      - main
+      - new
   pull_request:
     branches:
-      - main
+      - new
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
