@@ -19,7 +19,7 @@ jobs:
       - name: Install Dependencies
         run: |
           if ! command -v npm > /dev/null 2>&1; then npm install -g npm; fi
-          npm ci
+          npm install
 
       - name: Run Tests
         run: npm test
@@ -30,4 +30,5 @@ jobs:
       - name: Notify Slack
         if: always()
         run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"Pipeline ${{ github.workflow }}: ${{ job.status }}"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+          if [ "${{ job.status }}" = "success" ]; then STATUS="passed"; else STATUS="failed"; fi
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"${{ github.repository }} pipeline #${{ github.run_number }} on ${{ github.ref_name }} - '"$STATUS"'"}' ${{ secrets.SLACK_WEBHOOK_URL }}
